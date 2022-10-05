@@ -13,4 +13,3 @@
 
 - [How to send information from one window to another in Electron Framework
 ](https://ourcodeworld.com/articles/read/536/how-to-send-information-from-one-window-to-another-in-electron-framework)
-# jw-sc
