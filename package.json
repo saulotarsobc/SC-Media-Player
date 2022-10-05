@@ -1,0 +1,34 @@
+{
+  "name": "jw-sc",
+  "version": "1.0.0",
+  "description": "app em electron para reproduzir midias numa segunda tela",
+  "main": "main.js",
+  "scripts": {
+    "start-debug": "electron .  --trace-warnings > ./app-run.log  2>&1",
+    "start": "electron .",
+    "pack-win": "electron-builder --win",
+    "pack-win-test": "electron-builder --dir --win",
+    "pack-linux-test": "electron-builder --dir --linux",
+    "pack-linux": "electron-builder --linux",
+    "pack-mac": "electron-builder --mac",
+    "publish": "electron-builder --win -p always",
+    "publish-linux": "electron-builder --linux -p always",
+    "postinstall": "electron-builder install-app-deps",
+    "release": "electron-builder",
+    "sass": "sass -w scss/main.scss css/main.min.css -s compressed"
+  },
+  "repository": "https://github.com/saulotarsobc/jw-sc.git",
+  "keywords": [
+    "electron",
+    "jw",
+    "jw.org"
+  ],
+  "author": "Saulo Costa",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^21.0.1"
+  },
+  "dependencies": {
+    "jquery": "^3.6.1"
+  }
+}
