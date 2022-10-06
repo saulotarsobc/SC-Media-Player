@@ -41,8 +41,8 @@ function createWindow() {
 	secWindow.setAspectRatio(16 / 9);
 
 	/* Dev Tools */
-	mainWindow.webContents.openDevTools();
-	secWindow.webContents.openDevTools();
+	// mainWindow.webContents.openDevTools();
+	// secWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
