@@ -16,6 +16,7 @@ function createWindow() {
 	});
 	mainWindow.loadFile('index.html');
 	mainWindow.setPosition(50, 50);
+	secWindow.setAspectRatio(1 / 1);
 
 	/* secont scren */
 	secWindow = new BrowserWindow({
