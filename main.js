@@ -50,6 +50,7 @@ app.on('window-all-closed', function () {
 });
 
 /* code */
+
 ipcMain.on('video/control', (event, args) => {
 	secWindow.webContents.send('video/control', args);
 });
