@@ -4,6 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const video = document.querySelector('#video');
 
     ipcRenderer.on("video/control", (event, args) => {
+        
         console.log(args);
 
         if (args == "play") {

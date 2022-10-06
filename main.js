@@ -1,19 +1,12 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-let files = [];
-let midiasFolder = './midias'
-
-fs.readdirSync(midiasFolder).forEach(file => {
-	files.push({
-		name: file,
-		src: path.join(__dirname, midiasFolder, file),
-	});
-});
-
 let mainWindow;
 let secWindow;
+
+let files = [];
+let midiasFolder = '';
 
 function createWindow() {
 	/* main scren */
@@ -23,11 +16,12 @@ function createWindow() {
 		webPreferences: {
 			preload: path.join(__dirname, 'js', 'home.js'),
 			nodeIntegration: true,
-		}
+		},
+		// frame: false,
+		autoHideMenuBar: true
 	});
 	mainWindow.loadFile('index.html');
 	mainWindow.setPosition(50, 50);
-	// secWindow.setAspectRatio(1 / 1);
 
 	/* secont scren */
 	secWindow = new BrowserWindow({
@@ -46,8 +40,8 @@ function createWindow() {
 	secWindow.setAspectRatio(16 / 9);
 
 	/* Dev Tools */
-	mainWindow.webContents.openDevTools();
-	secWindow.webContents.openDevTools();
+	// mainWindow.webContents.openDevTools();
+	// secWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
@@ -62,15 +56,42 @@ app.on('window-all-closed', function () {
 });
 
 /* code */
-
-ipcMain.on('video/control', (event, args) => {
-	secWindow.webContents.send('video/control', args);
+ipcMain.on('video/control', (event, arg) => {
+	secWindow.webContents.send('video/control', arg);
 });
 
-ipcMain.on('getMidias', (event, args) => {
-	event.reply('received/midias', files)
+ipcMain.on('getMidias', (event, arg) => {
+	console.log(arg);
+	if (midiasFolder) {
+		fs.readdirSync(midiasFolder).forEach(file => {
+			files.push({
+				name: file,
+				src: path.join(midiasFolder, file),
+			});
+		});
+		event.reply('received/midias', files);
+	} else {
+		console.log('diretorio nao definido');
+	}
 });
 
-ipcMain.on('setMidia', (event, args) => {
-	secWindow.webContents.send('setMidia', args)
+ipcMain.on('setMidia', (event, arg) => {
+	secWindow.webContents.send('setMidia', arg)
 });
+
+ipcMain.on('set_folder', async (event, arg) => {
+
+	console.log(arg);
+
+	const result = await dialog.showOpenDialog(mainWindow, {
+		properties: ['openDirectory']
+	});
+
+	if (result.canceled) {
+		return;
+	}
+
+	console.log('directories selected', result.filePaths[0]);
+
+	midiasFolder = result.filePaths[0];
+})

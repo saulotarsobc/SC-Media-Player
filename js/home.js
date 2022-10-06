@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	const btn_stop = document.querySelector('#btn_stop');
 	const get_midias = document.querySelector('#get_midias');
 	const midias_list = document.querySelector('#midias_list');
+	const add_midia = document.querySelector('#add_midia');
 
 	btn_play.addEventListener('click', () => {
 		ipcRenderer.send('video/control', 'play');
@@ -24,12 +25,16 @@ window.addEventListener('DOMContentLoaded', () => {
 		ipcRenderer.send('getMidias', 'getMidias');
 	});
 
-	ipcRenderer.on('received/midias', (event, args) => {
-		console.log(args);
+	add_midia.addEventListener('click', () => {
+		ipcRenderer.send('set_folder', 'add_folder');
+	});
+
+	ipcRenderer.on('received/midias', (event, arg) => {
+		console.log(arg);
 
 		midias_list.innerHTML = "";
 
-		args.forEach(el => {
+		arg.forEach(el => {
 			let iten = `<div class="iten" id="${el.src}">
 				${el.name}
 			</div>`;

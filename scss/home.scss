@@ -1,5 +1,27 @@
-#hone {
+#home {
     height: 100vh;
     width: 100vw;
-    background-color: black;
+    background-color: rgb(156, 156, 156);
+
+    #controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: rgb(243, 255, 82);
+        padding: 10px 10px;
+
+        button {
+            padding: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            height: 30px;
+            width: 60px;
+            background-color: rgb(27, 27, 27);
+            border-radius: 5px;
+
+            svg {
+                height: 100%;
+                fill: white;
+            }
+        }
+    }
 }
