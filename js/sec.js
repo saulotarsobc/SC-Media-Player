@@ -20,5 +20,9 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
     });
-    
+
+    ipcRenderer.on('setMidia', (event, args) => {
+        video.src = args;
+    });
+
 });

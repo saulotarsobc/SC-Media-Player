@@ -1,5 +1,16 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const fs = require('fs');
+
+let files = [];
+let midiasFolder = './midias'
+
+fs.readdirSync(midiasFolder).forEach(file => {
+	files.push({
+		name: file,
+		src: path.join(__dirname, midiasFolder, file),
+	});
+});
 
 let mainWindow;
 let secWindow;
@@ -35,8 +46,8 @@ function createWindow() {
 	secWindow.setAspectRatio(16 / 9);
 
 	/* Dev Tools */
-	// mainWindow.webContents.openDevTools();
-	// secWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
+	secWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
@@ -54,4 +65,12 @@ app.on('window-all-closed', function () {
 
 ipcMain.on('video/control', (event, args) => {
 	secWindow.webContents.send('video/control', args);
+});
+
+ipcMain.on('getMidias', (event, args) => {
+	event.reply('received/midias', files)
+});
+
+ipcMain.on('setMidia', (event, args) => {
+	secWindow.webContents.send('setMidia', args)
 });
