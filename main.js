@@ -6,7 +6,7 @@ let mainWindow;
 let secWindow;
 
 let files = [];
-let midiasFolder = '';
+let midiasFolder = 'C:\\Users\\saulo\\Documents\\OnlyM\\Media';
 
 function createWindow() {
 	/* main scren */
@@ -40,8 +40,8 @@ function createWindow() {
 	secWindow.setAspectRatio(16 / 9);
 
 	/* Dev Tools */
-	// mainWindow.webContents.openDevTools();
-	// secWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
+	secWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
@@ -84,15 +84,13 @@ ipcMain.on('set_folder', async (event, arg) => {
 
 	// console.log(arg);
 
-	const result = await dialog.showOpenDialog(mainWindow, {
+	const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
 		properties: ['openDirectory']
 	});
 
-	if (result.canceled) {
+	if (canceled) {
 		return;
+	} else {
+		midiasFolder = result.filePaths[0];
 	}
-
-	// console.log('directories selected', result.filePaths[0]);
-
-	midiasFolder = result.filePaths[0];
 })

@@ -11,5 +11,6 @@
 
 ## REFERENCIA
 
-- [How to send information from one window to another in Electron Framework
-](https://ourcodeworld.com/articles/read/536/how-to-send-information-from-one-window-to-another-in-electron-framework)
+- [How to send information from one window to another in Electron Framework](https://ourcodeworld.com/articles/read/536/how-to-send-information-from-one-window-to-another-in-electron-framework)
+- [Selecting a Directory in Electron](https://jaketrent.com/post/select-directory-in-electron/)
+
