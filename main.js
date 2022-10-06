@@ -2,13 +2,8 @@ const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron'
 const path = require('path');
 const fs = require('fs');
 
-console.log({
-	process,
-});
-
 let mainWindow;
 let secWindow;
-
 let files = [];
 let midiasFolder = '';
 
