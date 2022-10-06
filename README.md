@@ -1,12 +1,13 @@
-# JW-SC
+# SC - Media Player
 
-## app em electron para reproduzir midias numa segunda tela
+## app em electron para reproduzir midias numa sengunda tela
 
 ## ROADMAP
 
 - [x] Dual screen
+- [ ] Persistencia de informações
 - [ ] Imagem como 'descanço'
-- [ ] Reprdução de midias
+- [x] Reprdução de midias
 - [ ] Criar lista de mídias
 
 ## REFERENCIA

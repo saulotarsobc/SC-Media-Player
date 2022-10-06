@@ -1,18 +1,24 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron');
 const path = require('path');
 const fs = require('fs');
+
+console.log({
+	process,
+});
 
 let mainWindow;
 let secWindow;
 
 let files = [];
-let midiasFolder = 'C:\\Users\\saulo\\Documents\\OnlyM\\Media';
+let midiasFolder = '';
 
 function createWindow() {
 	/* main scren */
 	mainWindow = new BrowserWindow({
-		width: 400,
 		height: 400,
+		width: 450,
+		// kiosk: true,
+		title: "SC Media Player",
 		webPreferences: {
 			preload: path.join(__dirname, 'js', 'home.js'),
 			nodeIntegration: true,
@@ -26,14 +32,14 @@ function createWindow() {
 	/* secont scren */
 	secWindow = new BrowserWindow({
 		// width: 300,
-		height: 450,
+		height: 300,
 		webPreferences: {
 			preload: path.join(__dirname, 'js', 'sec.js'),
 			nodeIntegration: true,
 		},
 		parent: mainWindow,
 		frame: false,
-		autoHideMenuBar: true
+		autoHideMenuBar: true,
 	});
 	secWindow.loadFile('sec.html');
 	secWindow.setPosition(500, 50);
@@ -72,7 +78,7 @@ ipcMain.on('getMidias', (event, arg) => {
 		});
 		event.reply('received/midias', files);
 	} else {
-		console.log('diretorio nao definido');
+		showNotification('SC - Media Player', 'subtitle', 'Diretório não definido');
 	}
 });
 
@@ -81,16 +87,10 @@ ipcMain.on('setMidia', (event, arg) => {
 });
 
 ipcMain.on('set_folder', async (event, arg) => {
+	const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] });
+	if (canceled) { return; } else { midiasFolder = filePaths[0]; }
+});
 
-	// console.log(arg);
-
-	const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
-		properties: ['openDirectory']
-	});
-
-	if (canceled) {
-		return;
-	} else {
-		midiasFolder = result.filePaths[0];
-	}
-})
+function showNotification(title, subtitle, body) {
+	new Notification({ title, subtitle, body, silent: true }).show();
+}
