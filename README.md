@@ -5,7 +5,7 @@
 ## ROADMAP
 
 - [x] Dual screen
-- [ ] Texto do ano
+- [ ] Imagem como 'descanço'
 - [ ] Reprdução de midias
 - [ ] Criar lista de mídias
 

@@ -16,7 +16,7 @@ function createWindow() {
 	});
 	mainWindow.loadFile('index.html');
 	mainWindow.setPosition(50, 50);
-	
+
 	/* secont scren */
 	secWindow = new BrowserWindow({
 		// width: 300,
@@ -50,17 +50,6 @@ app.on('window-all-closed', function () {
 });
 
 /* code */
-ipcMain.on('home/play', (event, args) => {
-	console.log(args);
-	secWindow.webContents.send('sec/play', 'play');
-});
-
-ipcMain.on('home/pause', (event, args) => {
-	console.log(args);
-	secWindow.webContents.send('sec/pause', 'pause');
-});
-
-ipcMain.on('home/stop', (event, args) => {
-	console.log(args);
-	secWindow.webContents.send('sec/stop', 'stop');
+ipcMain.on('video/control', (event, args) => {
+	secWindow.webContents.send('video/control', args);
 });
