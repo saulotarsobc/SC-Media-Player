@@ -3,27 +3,28 @@ window.addEventListener('DOMContentLoaded', () => {
     const { ipcRenderer } = require('electron');
     const video = document.querySelector('#video');
 
-    ipcRenderer.on("video/control", (event, args) => {
-        
-        console.log(args);
+    ipcRenderer.on("video/control", (event, arg) => {
 
-        if (args == "play") {
+        console.log(arg);
+
+        if (arg == "play") {
             video.play();
         }
 
-        if (args == "pause") {
+        if (arg == "pause") {
             video.pause();
         }
 
-        if (args == "stop") {
+        if (arg == "stop") {
             video.pause();
             video.currentTime = 0;
         }
 
     });
 
-    ipcRenderer.on('setMidia', (event, args) => {
-        video.src = args;
+    ipcRenderer.on('setMidia', (event, arg) => {
+        console.log(arg)
+        video.src = arg;
     });
 
 });

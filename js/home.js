@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		midias_list.innerHTML = "";
 
 		arg.forEach(el => {
-			let iten = `<div class="iten" id="${el.src}">
+			let iten = `<div class="iten" data-src="${el.src}" id="${el.id}">
 				${el.name}
 			</div>`;
 
@@ -45,8 +45,15 @@ window.addEventListener('DOMContentLoaded', () => {
 		let itens = document.querySelectorAll('.iten');
 
 		itens.forEach(iten => {
+			iten.classList.remove('active');
+
 			iten.addEventListener('click', () => {
-				ipcRenderer.send('setMidia', iten.id);
+				itens.forEach(iten => {
+					iten.classList.remove('active');
+				});
+				iten.classList.add('active');
+				console.log(iten.dataset.src);
+				ipcRenderer.send('setMidia', iten.dataset.src);
 			});
 		});
 
