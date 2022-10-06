@@ -61,7 +61,8 @@ ipcMain.on('video/control', (event, arg) => {
 });
 
 ipcMain.on('getMidias', (event, arg) => {
-	console.log(arg);
+	// console.log(arg);
+	files = [];
 	if (midiasFolder) {
 		fs.readdirSync(midiasFolder).forEach(file => {
 			files.push({
@@ -81,7 +82,7 @@ ipcMain.on('setMidia', (event, arg) => {
 
 ipcMain.on('set_folder', async (event, arg) => {
 
-	console.log(arg);
+	// console.log(arg);
 
 	const result = await dialog.showOpenDialog(mainWindow, {
 		properties: ['openDirectory']
@@ -91,7 +92,7 @@ ipcMain.on('set_folder', async (event, arg) => {
 		return;
 	}
 
-	console.log('directories selected', result.filePaths[0]);
+	// console.log('directories selected', result.filePaths[0]);
 
 	midiasFolder = result.filePaths[0];
 })
