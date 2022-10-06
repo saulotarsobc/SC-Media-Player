@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 let mainWindow;
@@ -16,7 +16,7 @@ function createWindow() {
 	});
 	mainWindow.loadFile('index.html');
 	mainWindow.setPosition(50, 50);
-	secWindow.setAspectRatio(1 / 1);
+	// secWindow.setAspectRatio(1 / 1);
 
 	/* secont scren */
 	secWindow = new BrowserWindow({
