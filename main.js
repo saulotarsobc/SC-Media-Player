@@ -29,7 +29,8 @@ function createWindow() {
 	/* secont scren */
 	secWindow = new BrowserWindow({
 		// width: 300,
-		height: 300,
+		height: 180,
+		minHeight:180,
 		webPreferences: {
 			preload: path.join(__dirname, 'js', 'sec.js'),
 			nodeIntegration: true,
