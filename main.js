@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron'
 const path = require('path');
 const fs = require('fs');
 const crypto = require("crypto");
+const sequelize = require("./database");
 
 let mainWindow;
 let secWindow;
@@ -30,7 +31,7 @@ function createWindow() {
 	secWindow = new BrowserWindow({
 		// width: 300,
 		height: 180,
-		minHeight:180,
+		minHeight: 180,
 		webPreferences: {
 			preload: path.join(__dirname, 'js', 'sec.js'),
 			nodeIntegration: true,
@@ -45,7 +46,7 @@ function createWindow() {
 
 	/* Dev Tools */
 	// mainWindow.webContents.openDevTools();
-	// secWindow.webContents.openDevTools();
+	secWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
