@@ -5,8 +5,8 @@
 ## ROADMAP
 
 - [X] Dual screen
-- [X] Persistencia de dados
-- [ ] Imagem como 'descanço'
+- [] Persistencia de dados
+- [] Imagem como 'descanço'
 - [X] Reprdução de midias
 - [X] Criar lista de mídias
 

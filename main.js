@@ -7,7 +7,7 @@ const { sequelize, getLocation, updateLocation } = require("./database");
 let mainWindow;
 let secWindow;
 let files = [];
-let midiasFolder ="";
+let midiasFolder = "";
 
 function createWindow() {
 	/* main scren */
@@ -76,15 +76,15 @@ ipcMain.on('set_folder', async (event, arg) => {
 	}
 	else {
 		midiasFolder = filePaths[0];
+		showNotification("SC - Media Player", "Diretório selecionado", midiasFolder);
 		updateLocation(1, midiasFolder)
 	}
 });
 
 
 ipcMain.on('getMidias', async (event, arg) => {
-	console.log("\n\ngetMidias\n\n");
+	console.log(arg);
 	files = [];
-	console.log("\n\n" + midiasFolder + "\n\n");
 	if (midiasFolder) {
 		fs.readdirSync(midiasFolder).forEach(file => {
 			files.push({

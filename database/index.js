@@ -17,6 +17,8 @@ const locations = sequelize.define('locations', {
     }
 });
 
+locations.sync({ alter: true });
+
 async function getLocation(id) {
     return locations.findOne({
         where: {
