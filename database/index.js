@@ -7,7 +7,6 @@ const sequelize = new Sequelize({
 });
 
 const locations = sequelize.define('locations', {
-    // Model attributes are defined here
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
