@@ -30,6 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	ipcRenderer.on('received/midias', (event, arg) => {
+
 		console.log(arg);
 
 		midias_list.innerHTML = "";
@@ -56,6 +57,12 @@ window.addEventListener('DOMContentLoaded', () => {
 				ipcRenderer.send('setMidia', iten.dataset.src);
 			});
 		});
+
+	});
+
+	ipcRenderer.once('teste', (event, arg) => {
+		
+		console.log(arg);
 
 	});
 

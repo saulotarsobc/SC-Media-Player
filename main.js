@@ -2,12 +2,16 @@ const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron'
 const path = require('path');
 const fs = require('fs');
 const crypto = require("crypto");
-const { sequelize, getLocation, updateLocation } = require("./database");
+const { getLocation, updateLocation } = require("./database");
 
 let mainWindow;
 let secWindow;
 let files = [];
 let midiasFolder = "";
+
+setTimeout(() => {
+	secWindow.webContents.send("teste", "123");
+}, 1000);
 
 function createWindow() {
 	/* main scren */
@@ -20,16 +24,13 @@ function createWindow() {
 			preload: path.join(__dirname, 'js', 'home.js'),
 			nodeIntegration: true,
 		},
-		// frame: false,
 		autoHideMenuBar: true
 	});
 	mainWindow.loadFile('index.html');
 	mainWindow.setPosition(50, 50);
 
-	/* secont scren */
+	/* second scren */
 	secWindow = new BrowserWindow({
-		// width: 300,
-		// kiosk: true,
 		height: 180,
 		minHeight: 180,
 		webPreferences: {
@@ -45,15 +46,13 @@ function createWindow() {
 	secWindow.setAspectRatio(16 / 9);
 
 	/* Dev Tools */
-	// mainWindow.webContents.openDevTools();
-	secWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
+	// secWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
 	createWindow();
-	app.on('activate', function () {
-		if (BrowserWindow.getAllWindows().length === 0) createWindow();
-	});
+	app.on('activate', function () { if (BrowserWindow.getAllWindows().length === 0) createWindow() });
 })
 
 app.on('window-all-closed', function () {
@@ -81,19 +80,21 @@ ipcMain.on('set_folder', async (event, arg) => {
 	}
 });
 
-
-ipcMain.on('getMidias', async (event, arg) => {
-	console.log(arg);
+ipcMain.on('getMidias', (event, arg) => {
 	files = [];
 	if (midiasFolder) {
+		console.log("\nMidias:")
 		fs.readdirSync(midiasFolder).forEach(file => {
+			console.log(midiasFolder, file)
 			files.push({
 				id: crypto.randomBytes(16).toString("hex"),
 				name: file,
 				src: path.join(midiasFolder, file),
 			});
 		});
+		console.log("\n");
 		event.reply('received/midias', files);
+		showNotification('SC - Media Player', 'Midias', 'Lista de mídias atualizada');
 	} else {
 		showNotification('SC - Media Player', 'Media Player', 'Diretório não definido');
 	}
@@ -109,3 +110,5 @@ async function getLocationRun() {
 }
 
 getLocationRun();
+
+updateLocation(1, 'midiasFolder')

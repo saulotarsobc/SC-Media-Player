@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 // Option 2: Passing parameters separately (sqlite)
 const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: './database/data.db'
+    storage: './data.db'
 });
 
 const locations = sequelize.define('locations', {
@@ -17,12 +17,12 @@ const locations = sequelize.define('locations', {
     }
 });
 
-locations.sync({ alter: true });
+// locations.sync({ alter: true });
 
-async function getLocation(id) {
+async function getLocation(chave) {
     return locations.findOne({
         where: {
-            id
+            chave
         }
     })
         .then((data) => {
@@ -33,10 +33,10 @@ async function getLocation(id) {
         })
 }
 
-async function updateLocation(id, newLocation) {
+async function updateLocation(chave, newLocation) {
     return locations.update({ location: newLocation }, {
         where: {
-            id
+            chave
         }
     })
         .then((data) => {
@@ -46,5 +46,7 @@ async function updateLocation(id, newLocation) {
             console.log(e.message);
         })
 }
+
+updateLocation("location", "123");
 
 module.exports = { sequelize, getLocation, updateLocation };
