@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "crypto": "^1.0.1",
-    "jquery": "^3.6.1",
+    "jquery": "^3.6.3",
     "sequelize": "^6.28.0",
     "sqlite3": "^5.1.4"
   }
