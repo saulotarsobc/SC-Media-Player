@@ -2,13 +2,12 @@ const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron'
 const path = require('path');
 const fs = require('fs');
 const crypto = require("crypto");
-const sequelize = require("./database");
+const { sequelize, getLocation, updateLocation } = require("./database");
 
 let mainWindow;
 let secWindow;
 let files = [];
-let midiasFolder = 'C:\\Users\\saulo\\Documents\\OnlyM\\Media';
-// let midiasFolder = '';
+let midiasFolder ="";
 
 function createWindow() {
 	/* main scren */
@@ -30,6 +29,7 @@ function createWindow() {
 	/* secont scren */
 	secWindow = new BrowserWindow({
 		// width: 300,
+		// kiosk: true,
 		height: 180,
 		minHeight: 180,
 		webPreferences: {
@@ -62,7 +62,7 @@ app.on('window-all-closed', function () {
 
 /* code */
 function showNotification(title, subtitle, body) {
-	new Notification({ title, subtitle, body, silent: true }).show();
+	new Notification({ title, subtitle, body, silent: false }).show();
 }
 
 ipcMain.on('video/control', (event, arg) => {
@@ -71,12 +71,20 @@ ipcMain.on('video/control', (event, arg) => {
 
 ipcMain.on('set_folder', async (event, arg) => {
 	const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] });
-	if (canceled) { return; } else { midiasFolder = filePaths[0]; }
+	if (canceled) {
+		return;
+	}
+	else {
+		midiasFolder = filePaths[0];
+		updateLocation(1, midiasFolder)
+	}
 });
 
-ipcMain.on('getMidias', (event, arg) => {
-	// console.log(arg);
+
+ipcMain.on('getMidias', async (event, arg) => {
+	console.log("\n\ngetMidias\n\n");
 	files = [];
+	console.log("\n\n" + midiasFolder + "\n\n");
 	if (midiasFolder) {
 		fs.readdirSync(midiasFolder).forEach(file => {
 			files.push({
@@ -94,3 +102,10 @@ ipcMain.on('getMidias', (event, arg) => {
 ipcMain.on('setMidia', (event, arg) => {
 	secWindow.webContents.send('setMidia', arg)
 });
+
+async function getLocationRun() {
+	let getLocationString = await getLocation(1);
+	midiasFolder = getLocationString.dataValues.location;
+}
+
+getLocationRun();

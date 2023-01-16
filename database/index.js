@@ -17,25 +17,32 @@ const locations = sequelize.define('locations', {
     }
 });
 
-// locations.sync({ alter: true });
-
-// locations.create({
-//     location: "aki",
-// }).then((data) => {
-//     conosole.log(data);
-// }).catch((e) => {
-//     conosole.log(e.message);
-// })
-
-locations.findAll({
-    where: {
-        id: 1
-    }
-})
-    .then((data) => {
-        console.log(data);
-    }).catch((e) => {
-        console.log(e.message);
+async function getLocation(id) {
+    return locations.findOne({
+        where: {
+            id
+        }
     })
+        .then((data) => {
+            // console.log(data);
+            return (data);
+        }).catch((e) => {
+            console.log(e.message);
+        })
+}
 
-module.exports = sequelize;
+async function updateLocation(id, newLocation) {
+    return locations.update({ location: newLocation }, {
+        where: {
+            id
+        }
+    })
+        .then((data) => {
+            // console.log(data);
+            return (data);
+        }).catch((e) => {
+            console.log(e.message);
+        })
+}
+
+module.exports = { sequelize, getLocation, updateLocation };

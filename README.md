@@ -4,11 +4,11 @@
 
 ## ROADMAP
 
-- [x] Dual screen
-- [ ] Persistencia de informações
+- [X] Dual screen
+- [X] Persistencia de informações
 - [ ] Imagem como 'descanço'
-- [x] Reprdução de midias
-- [ ] Criar lista de mídias
+- [X] Reprdução de midias
+- [X] Criar lista de mídias
 
 ## REFERENCIA
 
