@@ -1,32 +1,32 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
-// Option 2: Passing parameters separately (sqlite)
 const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: './data.db'
 });
 
-const locations = sequelize.define('locations', {
-    id: {
-        type: DataTypes.INTEGER,
+const Configs = sequelize.define('configs', {
+    chave: {
+        type: DataTypes.STRING,
         primaryKey: true,
     },
-    location: {
+    valor: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     }
 });
 
-// locations.sync({ alter: true });
+// Configs.sync({ alter: true });
 
-async function getLocation(chave) {
-    return locations.findOne({
+// Configs.create({ chave: "location", valor: "1234" }).then((data) => { console.log(data) }).then((e) => console.log(e, message));
+
+async function getConfig(chave) {
+    return Configs.findOne({
         where: {
-            chave
+            chave: chave
         }
     })
         .then((data) => {
-            // console.log(data);
             return (data);
         }).catch((e) => {
             console.log(e.message);
@@ -34,19 +34,21 @@ async function getLocation(chave) {
 }
 
 async function updateLocation(chave, newLocation) {
-    return locations.update({ location: newLocation }, {
+    return Configs.update({ valor: newLocation }, {
         where: {
             chave
         }
     })
         .then((data) => {
-            // console.log(data);
             return (data);
         }).catch((e) => {
             console.log(e.message);
         })
 }
 
-updateLocation("location", "123");
+// setTimeout(async () => {
+//     let teste = await getConfig("location");
+//     console.log(teste.dataValues.valor);
+// }, 1000);
 
-module.exports = { sequelize, getLocation, updateLocation };
+module.exports = { sequelize, getConfig, updateLocation };

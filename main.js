@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog, Notification } = require('electron'
 const path = require('path');
 const fs = require('fs');
 const crypto = require("crypto");
-const { getLocation, updateLocation } = require("./database");
+const { getConfig, updateLocation } = require("./database");
 
 let mainWindow;
 let secWindow;
@@ -76,7 +76,7 @@ ipcMain.on('set_folder', async (event, arg) => {
 	else {
 		midiasFolder = filePaths[0];
 		showNotification("SC - Media Player", "Diretório selecionado", midiasFolder);
-		updateLocation(1, midiasFolder)
+		updateLocation("location", midiasFolder);
 	}
 });
 
@@ -104,11 +104,13 @@ ipcMain.on('setMidia', (event, arg) => {
 	secWindow.webContents.send('setMidia', arg)
 });
 
-async function getLocationRun() {
-	let getLocationString = await getLocation(1);
-	midiasFolder = getLocationString.dataValues.location;
+async function getConfigRun() {
+	console.log('getConfigRun');
+	let data = await getConfig("location");
+	midiasFolder = data.dataValues.valor;
+	console.log("\n\n" + midiasFolder + "\n\n");
 }
 
-getLocationRun();
-
-updateLocation(1, 'midiasFolder')
+setTimeout(() => {
+	getConfigRun();
+}, 1000);
