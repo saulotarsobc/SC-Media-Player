@@ -16,9 +16,9 @@ const Configs = sequelize.define('configs', {
     }
 });
 
-// Configs.sync({ alter: true });
+Configs.sync({ alter: true });
 
-// Configs.create({ chave: "location", valor: "1234" }).then((data) => { console.log(data) }).then((e) => console.log(e, message));
+Configs.create({ chave: "location", valor: "1234" }).then((data) => { console.log(data) }).then((e) => console.log(e, message));
 
 async function getConfig(chave) {
     return Configs.findOne({
