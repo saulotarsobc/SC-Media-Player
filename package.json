@@ -1,7 +1,8 @@
 {
-    "name": "jw-sc",
-    "version": "1.0.0",
+    "name": "SC-Media-Player",
+    "version": "2.0.0",
     "description": "app em electron para reproduzir midias numa segunda tela",
+    "icon": "./build/icon.png",
     "main": "main.js",
     "scripts": {
         "start-debug": "electron .  --trace-warnings > ./app-run.log  2>&1",
@@ -15,7 +16,7 @@
         "publish-linux": "electron-builder --linux -p always",
         "postinstall": "electron-builder install-app-deps",
         "release": "electron-builder",
-        "sass": "sass -w scss/main.scss css/main.min.css -s compressed"
+        "sass": "sass -w src/views/scss/main.scss src/views/css/main.min.css -s compressed"
     },
     "repository": "https://github.com/saulotarsobc/jw-sc.git",
     "keywords": [
@@ -28,11 +29,13 @@
     "author": "Saulo Costa",
     "license": "CC0-1.0",
     "devDependencies": {
-        "electron": "^21.4.1"
+        "electron": "^21.4.1",
+        "electron-builder": "^23.6.0"
     },
     "dependencies": {
         "@electron/remote": "^2.0.9",
-        "crypto": "^1.0.1",
-        "sequelize": "^6.28.1"
+        "ffprobe": "^1.1.2",
+        "sequelize": "^6.28.1",
+        "sqlite3": "^5.1.4"
     }
 }

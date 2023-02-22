@@ -1,41 +1,44 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const path = require("path");
 
-let mainWindow;
-let secWindow;
+const remote = require("@electron/remote/main");
+remote.initialize();
+
+let win;
+let sec;
 
 function createWindows() {
     /* main window */
-    mainWindow = new BrowserWindow({
+    win = new BrowserWindow({
         height: 500,
         width: 450,
-        title: "SC Media Player",
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
         },
-        // autoHideMenuBar: true
+        autoHideMenuBar: true,
     });
-    mainWindow.loadFile("./src/views/index.html");
-    mainWindow.setPosition(50, 50);
-    mainWindow.webContents.openDevTools();
+    win.loadFile("./src/views/index.html");
+    win.setPosition(50, 50);
+    remote.enable(win.webContents);
+    // win.webContents.openDevTools();
 
     /* second window */
-    secWindow = new BrowserWindow({
-        // height: 180,
-        // minHeight: 180,
+    sec = new BrowserWindow({
+        height: 180,
+        minHeight: 180,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
         },
-        alwaysOnTop: true,
-        parent: mainWindow,
-        // frame: false,
-        // autoHideMenuBar: true,
+        parent: win,
+        frame: false,
+        autoHideMenuBar: true,
     });
-    secWindow.loadFile("./src/views/sec.html");
-    secWindow.setPosition(500, 50);
-    // secWindow.setAspectRatio(16 / 9);
-    secWindow.webContents.openDevTools();
+    sec.loadFile("./src/views/sec.html");
+    sec.setPosition(500, 50);
+    sec.setAspectRatio(16 / 9);
+    // sec.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
@@ -50,3 +53,25 @@ app.on("window-all-closed", function() {
 });
 
 /* code */
+ipcMain.on("addMidiaInDb", async(event, arg) => {
+    dialog
+        .showOpenDialog({ properties: ["openFile"] })
+        .then((result) => {
+            if (!result.canceled) {
+                const filePath = result.filePaths[0];
+                const fileName = path.parse(filePath).name;
+                win.webContents.send("addMidiaInDb", { name: fileName, src: filePath });
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+ipcMain.on('setMidia', (event, args) => {
+    sec.webContents.send('setMidia', args)
+});
+
+ipcMain.on('video/control', (event, args) => {
+    sec.webContents.send('video/control', args);
+});

@@ -20,5 +20,9 @@ ipcRenderer.on("video/control", (event, arg) => {
 
 ipcRenderer.on("setMidia", (event, arg) => {
     console.log(arg);
-    video.src = arg;
+    if (video.src == arg) {
+        return;
+    } else {
+        video.src = arg;
+    }
 });
