@@ -1,11 +1,11 @@
 const { app, BrowserWindow } = require("electron");
 
-// let mainWindow;
-// let secWindow;
+let mainWindow;
+let secWindow;
 
 function createWindows() {
     /* main window */
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         height: 500,
         width: 450,
         title: "SC Media Player",
@@ -15,12 +15,12 @@ function createWindows() {
         },
         // autoHideMenuBar: true
     });
-    mainWindow.loadFile("index.html");
+    mainWindow.loadFile("./src/views/index.html");
     mainWindow.setPosition(50, 50);
     mainWindow.webContents.openDevTools();
 
     /* second window */
-    const secWindow = new BrowserWindow({
+    secWindow = new BrowserWindow({
         // height: 180,
         // minHeight: 180,
         webPreferences: {
@@ -32,7 +32,7 @@ function createWindows() {
         // frame: false,
         // autoHideMenuBar: true,
     });
-    secWindow.loadFile("sec.html");
+    secWindow.loadFile("./src/views/sec.html");
     secWindow.setPosition(500, 50);
     // secWindow.setAspectRatio(16 / 9);
     secWindow.webContents.openDevTools();
