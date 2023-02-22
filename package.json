@@ -29,6 +29,7 @@
     "electron": "^21.0.1"
   },
   "dependencies": {
+    "@electron/remote": "^2.0.9",
     "crypto": "^1.0.1",
     "jquery": "^3.6.1",
     "sequelize": "^6.28.0",

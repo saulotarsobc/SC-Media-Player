@@ -4,6 +4,9 @@ const fs = require('fs');
 const crypto = require("crypto");
 const { getConfig, updateLocation } = require("./database");
 
+const remote = require("@electron/remote/main");
+remote.initialize();
+
 let mainWindow;
 let secWindow;
 let files = [];
