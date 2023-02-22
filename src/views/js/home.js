@@ -23,8 +23,16 @@ get_midias.addEventListener("click", () => {
     ipcRenderer.send("getMidias", "getMidias");
 });
 
-add_midia.addEventListener("click", () => {
-    ipcRenderer.send("set_folder", "add_folder");
+add_midia.addEventListener("click", async() => {
+    // ipcRenderer.send("set_folder", "add_folder");
+    const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] });
+    if (canceled) {
+        return;
+    } else {
+        midiasFolder = filePaths[0];
+        showNotification("SC - Media Player", "Diretório selecionado", midiasFolder);
+        updateLocation("location", midiasFolder);
+    }
 });
 
 ipcRenderer.on("received/midias", (event, arg) => {
