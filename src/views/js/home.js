@@ -1,12 +1,14 @@
-const btn_play = document.querySelector("#btn_play");
-const btn_pause = document.querySelector("#btn_pause");
-const btn_stop = document.querySelector("#btn_stop");
-const get_midias = document.querySelector("#get_midias");
-const midias_list = document.querySelector("#midias_list");
-const add_midia = document.querySelector("#add_midia");
+/* navegador */
+const btn_play = document.querySelector("#btn_play"),
+    btn_pause = document.querySelector("#btn_pause"),
+    btn_stop = document.querySelector("#btn_stop"),
+    get_midias = document.querySelector("#get_midias"),
+    midias_list = document.querySelector("#midias_list"),
+    add_midia = document.querySelector("#add_midia");
 /* ====================== */
 
-const { ipcRenderer } = require("electron"), { Sequelize, DataTypes } = require("sequelize"),
+const { ipcRenderer } = require("electron");
+const { Sequelize, DataTypes } = require("sequelize"),
     path = require("path"),
     remote = require("@electron/remote"),
     appPath = remote.app.getPath("userData"),
@@ -20,11 +22,10 @@ const { ipcRenderer } = require("electron"), { Sequelize, DataTypes } = require(
 Midias.sync({ alter: true });
 
 add_midia.addEventListener("click", async() => {
-    ipcRenderer.send("addMidiaInDb");
+    ipcRenderer.send("addMidiaInDb", "chamando 'addMidiaInDb' para showOpenDialog no main");
 });
 
-ipcRenderer.on("addMidiaInDb", async(events, args) => {
-    const { name, src } = args;
+ipcRenderer.on("addMidiaInDb", async(events, { name, src }) => {
     Midias.create({ name, src })
         .then(() => {
             updateLista();
@@ -42,19 +43,13 @@ async function updateLista() {
     await Midias.findAll({ raw: true })
         .then((midias) => {
             midias_list.innerHTML = "";
-            midias.map((midia) => {
-                let iten = `<div class="iten" data-src="${midia.src}" id="${midia.id}">
-                    ${midia.name}
-                    <br>
-                    <div class="deletar" data-id="${midia.id}">APAGAR</div>
-                </div>`;
 
-                midias_list.innerHTML += iten;
+            midias.map(({ src, name, id }) => {
+                midias_list.innerHTML += `<div class="iten" data-src="${src}" id="${id}">${name}<br><div class="deletar" data-id="${id}">APAGAR</div></div>`;
             });
 
             document.querySelectorAll(".iten").forEach((iten) => {
                 iten.classList.remove("active");
-
                 iten.addEventListener("click", () => {
                     document.querySelectorAll(".iten").forEach((iten) => {
                         iten.classList.remove("active");
@@ -73,7 +68,7 @@ async function updateLista() {
         .catch((e) => {
             console.log("erro: ", e);
         });
-}
+};
 
 function deleteInDb(id) {
     Midias.destroy({ where: { id } })
@@ -84,18 +79,18 @@ function deleteInDb(id) {
         .catch((e) => {
             console.log("erro: ", e);
         });
-}
+};
 
 btn_play.addEventListener("click", () =>
-    ipcRenderer.send("video/control", "play")
+    ipcRenderer.send("video/control", "key => play")
 );
 
 btn_pause.addEventListener("click", () =>
-    ipcRenderer.send("video/control", "pause")
+    ipcRenderer.send("video/control", "key => pause")
 );
 
 btn_stop.addEventListener("click", () =>
-    ipcRenderer.send("video/control", "stop")
+    ipcRenderer.send("video/control", "key => stop")
 );
 
 updateLista();

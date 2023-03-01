@@ -3,8 +3,8 @@ const path = require("path");
 const productName = require('./package.json').build.productName;
 const appVersion = require('./package.json').version;
 
-const remote = require("@electron/remote/main");
-remote.initialize();
+const remoteMain = require("@electron/remote/main");
+remoteMain.initialize();
 
 let win;
 let sec;
@@ -23,7 +23,7 @@ function createWindows() {
     win.loadFile("./src/views/index.html");
     win.setTitle(`${productName} - v${appVersion}`);
     win.setPosition(50, 50);
-    remote.enable(win.webContents);
+    remoteMain.enable(win.webContents);
     // win.webContents.openDevTools();
 
     /* second window */
@@ -59,7 +59,8 @@ app.on("window-all-closed", function() {
 });
 
 /* code */
-ipcMain.on("addMidiaInDb", async(event, arg) => {
+ipcMain.on("addMidiaInDb", async(event, args) => {
+    console.log(args);
     dialog
         .showOpenDialog({ properties: ["openFile"] })
         .then((result) => {
@@ -75,9 +76,11 @@ ipcMain.on("addMidiaInDb", async(event, arg) => {
 });
 
 ipcMain.on('setMidia', (event, args) => {
+    console.log(args);
     sec.webContents.send('setMidia', args)
 });
 
 ipcMain.on('video/control', (event, args) => {
+    console.log(args);
     sec.webContents.send('video/control', args);
 });
