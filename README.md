@@ -6,9 +6,12 @@
 
 - [X] Dual screen
 - [X] Persistencia de dados (.sqlite)
-- [ ] Imagem como 'descanço'
 - [X] Reprodução de midias
 - [X] Criar lista de mídias
+- [ ] Imagem como 'descanço'
+- [ ] Thumb das midias
+- [ ] Volume dos vídeos
+- [ ] Barra de progresso do vídeo
 
 ## REFERENCIAS
 
