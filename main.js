@@ -19,6 +19,7 @@ function createWindows() {
         autoHideMenuBar: true,
     });
     win.loadFile("./src/views/index.html");
+    win.setTitle("SC Media Player v2.0.0");
     win.setPosition(50, 50);
     remote.enable(win.webContents);
     // win.webContents.openDevTools();
@@ -36,6 +37,7 @@ function createWindows() {
         autoHideMenuBar: true,
     });
     sec.loadFile("./src/views/sec.html");
+    sec.setTitle("SC-Media-Player-Second");
     sec.setPosition(500, 50);
     sec.setAspectRatio(16 / 9);
     // sec.webContents.openDevTools();
@@ -43,12 +45,14 @@ function createWindows() {
 
 app.whenReady().then(() => {
     createWindows();
+    console.log("app inicializado...");
     app.on("activate", function() {
         if (BrowserWindow.getAllWindows().length === 0) createWindows();
     });
 });
 
 app.on("window-all-closed", function() {
+    console.log("...app finalizado");
     if (process.platform !== "darwin") app.quit();
 });
 

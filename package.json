@@ -1,9 +1,14 @@
 {
-    "name": "SC-Media-Player",
+    "name": "sc-media-player",
     "version": "2.0.0",
     "description": "app em electron para reproduzir midias numa segunda tela",
     "icon": "./build/icon.png",
     "main": "main.js",
+    "build": {
+        "productName": "SC Media Player",
+        "appId": "saulotarsobc.sc.media.player",
+        "asar": false
+    },
     "scripts": {
         "start-debug": "electron .  --trace-warnings > ./app-run.log  2>&1",
         "start": "electron .",
