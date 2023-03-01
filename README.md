@@ -1,4 +1,4 @@
-# SC - Media Player
+# SC Media Player
 
 ## App em electron para reproduzir midias numa sengunda tela
 
