@@ -7,7 +7,7 @@
     "build": {
         "productName": "SC Media Player",
         "appId": "saulotarsobc.sc.media.player",
-        "asar": false
+        "asar": true
     },
     "scripts": {
         "start-debug": "electron .  --trace-warnings > ./app-run.log  2>&1",
@@ -23,7 +23,7 @@
         "release": "electron-builder",
         "sass": "sass -w src/views/scss/main.scss src/views/css/main.min.css -s compressed"
     },
-    "repository": "https://github.com/saulotarsobc/jw-sc.git",
+    "repository": "https://github.com/saulotarsobc/SC-Media-Player.git",
     "keywords": [
         "electron",
         "jw",

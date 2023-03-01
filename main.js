@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
+const productName = require('./package.json').build.productName;
+const appVersion = require('./package.json').version;
 
 const remote = require("@electron/remote/main");
 remote.initialize();
@@ -10,7 +12,7 @@ let sec;
 function createWindows() {
     /* main window */
     win = new BrowserWindow({
-        height: 500,
+        // height: 500,
         width: 450,
         webPreferences: {
             nodeIntegration: true,
@@ -19,7 +21,7 @@ function createWindows() {
         autoHideMenuBar: true,
     });
     win.loadFile("./src/views/index.html");
-    win.setTitle("SC Media Player v2.0.0");
+    win.setTitle(`${productName} - v${appVersion}`);
     win.setPosition(50, 50);
     remote.enable(win.webContents);
     // win.webContents.openDevTools();
