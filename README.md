@@ -2,6 +2,8 @@
 
 ## App em electron para reproduzir midias numa sengunda tela
 
+![1677784227908](image/README/1677784227908.png)
+
 ## ROADMAP
 
 - [X] Dual screen
@@ -11,7 +13,7 @@
 - [ ] Imagem como 'descanço'
 - [ ] Thumb das midias
 - [ ] Volume dos vídeos
-- [ ] Barra de progresso do vídeo
+- [X] Barra de progresso do vídeo
 
 ## REFERENCIAS
 
