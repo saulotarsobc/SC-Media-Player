@@ -1,9 +1,10 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const remoteMain = require("@electron/remote/main");
-remoteMain.initialize();
+
 
 let win, sec;
+remoteMain.initialize();
 
 function createWindows() {
     /* main window */
