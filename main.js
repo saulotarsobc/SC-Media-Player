@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
+
 const productName = require('./package.json').build.productName;
 const appVersion = require('./package.json').version;
 
@@ -12,8 +13,9 @@ let sec;
 function createWindows() {
     /* main window */
     win = new BrowserWindow({
-        // height: 500,
+        height: 500,
         width: 450,
+        width: 1300,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -48,18 +50,18 @@ function createWindows() {
 app.whenReady().then(() => {
     createWindows();
     console.log("app inicializado...");
-    app.on("activate", function() {
+    app.on("activate", function () {
         if (BrowserWindow.getAllWindows().length === 0) createWindows();
     });
 });
 
-app.on("window-all-closed", function() {
+app.on("window-all-closed", function () {
     console.log("...app finalizado");
     if (process.platform !== "darwin") app.quit();
 });
 
 /* code */
-ipcMain.on("addMidiaInDb", async(event, args) => {
+ipcMain.on("addMidiaInDb", async (event, args) => {
     console.log(args);
     dialog
         .showOpenDialog({ properties: ["openFile"] })
@@ -83,4 +85,8 @@ ipcMain.on('setMidia', (event, args) => {
 ipcMain.on('video/control', (event, args) => {
     console.log(args);
     sec.webContents.send('video/control', args);
+});
+
+ipcMain.on('timeupdate', (event, args) => {
+    win.webContents.send('timeupdate', args);
 });

@@ -1,0 +1,17 @@
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    background-color: #f5f5f5;
+}
+
+/* define a aparência do polegar da barra de rolagem */
+::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* define a aparência da trilha da barra de rolagem */
+::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}

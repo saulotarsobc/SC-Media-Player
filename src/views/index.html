@@ -3,8 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
     <link href="./css/main.min.css" rel="stylesheet">
+    <!-- <meta http-equiv="refresh" content="2"> -->
     <title></title>
 </head>
 
@@ -51,12 +53,15 @@
 
         </div>
 
-        <!-- <div id="progress_wrap">
+        <div id="progress_wrap">
             <div id="progress_bar">
-                <div id="progress_circle">
+                <div id="timers">
+                    <div class="timer" id="time_corrente">02:05</div>
+                    <input id="progress_input" type="range" value="0" min="0" max="1000" step="1">
+                    <div class="timer" id="time_final">03:10</div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <div id="midias_list"></div>
 

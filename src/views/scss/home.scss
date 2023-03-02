@@ -2,21 +2,28 @@
     height: 100vh;
     width: 100vw;
     background-color: #181818;
+    overflow: hidden;
 
     #controls {
         display: flex;
         align-items: center;
         justify-content: space-around;
-        background-color: rgb(243, 255, 82);
-        padding: 10px 5px;
+        background-color: #ffffff;
+        // padding: 10px 5px;
+        height: 40px;
 
         button {
             padding: 2px;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: "Courier New", Courier, monospace;
             height: 32px;
             width: 60px;
             background-color: #1b1b1b;
             border-radius: 5px;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                scale: 1.2;
+            }
 
             svg {
                 height: 100%;
@@ -29,40 +36,95 @@
         background-color: white;
         height: 50px;
         width: 100%;
-        // border-bottom: 1px solid #1b1b1b;
         display: flex;
         align-items: center;
+        justify-content: center;
 
         #progress_bar {
-            height: 10px;
-            background-color: #1b1b1b;
-            width: 50%;
+            height: 32px;
+            padding: 3px;
+            background-color: #5c5c5c;
+            width: 99%;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: center;
+            border-radius: 5px;
 
-            #progress_circle {
-                height: 15px;
-                width: 15px;
-                border-radius: 50%;
-                background-color: red;
-                transform: translate(7px, 0px);
+            #timers {
+                // background-color: rebeccapurple;
+                height: 20px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: #fff;
+                font-family: 'Courier New', Courier, monospace;
+
+                .timer {
+                    // text-align: center;
+                    width: 100px;
+                    background-color: #a3a3a3;
+                    margin: 0 2px;
+                    height: 15px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 12px;
+                }
+
+                #time_corrente {
+                    z-index: 1;
+                    border-radius: 15px 0 0 15px;
+                }
+
+                #progress_input {
+                    z-index: 2;
+                }
+
+                #time_final {
+                    z-index: 1;
+                    border-radius: 0 15px 15px 0;
+                }
             }
         }
     }
 
     #midias_list {
+        font-family: 'Courier New', Courier, monospace;
         width: 100%;
+        height: calc(100vh - 40px - 50px);
+        overflow: scroll;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
         .iten {
-            width: 100%;
-            height: 40px;
+            width: 99%;
+            min-height: 50px;
             background-color: #ffffff;
-            transition: all .5s ease-in-out;
-            padding: 0 5px;
+            transition: all 0.5s ease-in-out;
+            padding: 5px 5px;
+            border-radius: 5px;
 
-            &+.iten {
-                margin-top: 2px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 3px;
+
+            .deletar {
+                background-color: rgb(255, 55, 0);
+                height: 30px;
+                padding: 5px 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                color: #ffffff;
+                border-radius: 5px;
+                cursor: pointer;
             }
         }
 

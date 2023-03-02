@@ -1,0 +1,65 @@
+/*********** Baseline, reset styles ***********/
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  transition: all .5s ease-in-out;
+}
+
+/* Removes default focus */
+input[type="range"]:hover,
+input[type="range"]:focus,
+input[type="range"]:active {
+  outline: none;
+}
+
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #a3a3a3;
+  border-radius: 0px;
+  height: 15px;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -3.5px; /* Centers thumb on the track */
+  background-color: #2b2b2b;
+  border-radius: 22%;
+  height: 22px;
+  width: 22px;
+  transition: all .5s ease-in-out;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  outline: 3px solid #2b2b2b;
+  outline-offset: 0.125rem;
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+  background-color: #a3a3a3;
+  border-radius: 0px;
+  height: 15px;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+  background-color: #2b2b2b;
+  border: none; /*Removes extra border that FF applies*/
+  border-radius: 22%;
+  height: 22px;
+  width: 22px;
+  transition: all .5s ease-in-out;
+}
+
+input[type="range"]:focus::-moz-range-thumb{
+  outline: 3px solid #2b2b2b;
+  outline-offset: 0.125rem;
+  transition: all .5s ease-in-out;
+}
