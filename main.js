@@ -2,7 +2,6 @@ const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const remoteMain = require("@electron/remote/main");
 
-
 let win, sec;
 remoteMain.initialize();
 
@@ -21,7 +20,7 @@ function createWindows() {
     win.setTitle("SC Media Player - v3.0.0");
     win.setPosition(50, 50);
     remoteMain.enable(win.webContents);
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     /* second window */
     sec = new BrowserWindow({
