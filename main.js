@@ -17,10 +17,10 @@ function createWindows() {
         autoHideMenuBar: true,
     });
     win.loadFile("./src/views/index.html");
-    win.setTitle("SC Media Player - v3.0.0");
+    win.setTitle("SC Media Player");
     win.setPosition(50, 50);
     remoteMain.enable(win.webContents);
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     /* second window */
     sec = new BrowserWindow({
@@ -66,9 +66,7 @@ ipcMain.on("addMidiaInDb", async (event, args) => {
                 win.webContents.send("addMidiaInDb", { name: fileName, src: filePath });
             }
         })
-        .catch((err) => {
-            console.log(err);
-        });
+        .catch((err) => console.log(err));
 });
 
 ipcMain.on('setMidia', (event, args) => {
@@ -79,6 +77,11 @@ ipcMain.on('setMidia', (event, args) => {
 ipcMain.on('video/control', (event, args) => {
     console.log(args);
     sec.webContents.send('video/control', args);
+});
+
+ipcMain.on('video/setProgress', (event, args) => {
+    console.log(args);
+    sec.webContents.send('video/setProgress', args);
 });
 
 ipcMain.on('timeupdate', (event, args) => {

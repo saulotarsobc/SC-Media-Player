@@ -1,15 +1,6 @@
 const { ipcRenderer } = require("electron");
 const video = document.querySelector("#video");
 
-video.addEventListener('timeupdate', function () {
-    setTimeout(() => {
-        ipcRenderer.send('timeupdate', {
-            currentTime: video.currentTime,
-            duration: video.duration,
-        });
-    }, 100);
-});
-
 ipcRenderer.on("video/control", (event, arg) => {
     console.log(arg);
 
@@ -28,8 +19,9 @@ ipcRenderer.on("video/control", (event, arg) => {
     }
 });
 
+ipcRenderer.on("video/setProgress", (event, arg) => video.currentTime = arg);
+
 ipcRenderer.on("setMidia", (event, arg) => {
-    console.log(arg);
     if (video.src == arg) {
         return;
     } else {

@@ -1,6 +1,6 @@
 {
     "name": "sc-media-player",
-    "version": "3.0.0",
+    "version": "4.0.0",
     "description": "app em electron para reproduzir midias numa segunda tela",
     "icon": "./build/icon.png",
     "main": "main.js",
@@ -38,7 +38,8 @@
     },
     "dependencies": {
         "@electron/remote": "^2.0.9",
-        "ffprobe": "^1.1.2",
+        "@iconscout/unicons": "^4.0.8",
+        "fluent-ffmpeg": "^2.1.2",
         "sequelize": "^6.29.3",
         "sqlite3": "^5.1.6"
     }

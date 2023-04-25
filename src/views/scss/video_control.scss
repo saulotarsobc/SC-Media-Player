@@ -1,0 +1,16 @@
+div#video_control {
+    background-color: #000;
+    padding: 5px;
+
+    display: flex;
+    justify-content: center;
+
+    video#video_main {
+        border: 1px solid white;
+        border-radius: 5px;
+        height: 200px;
+        // width: 100%;
+        overflow: hidden;
+        aspect-ratio: 16/9;
+    }
+}

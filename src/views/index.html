@@ -6,6 +6,8 @@
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
     <link href="./css/main.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../node_modules/@iconscout/unicons/css/line.css">
+    <!-- https://iconscout.com/unicons/explore/line -->
     <!-- <meta http-equiv="refresh" content="2"> -->
     <title></title>
 </head>
@@ -17,53 +19,37 @@
         <div id="controls">
 
             <button id="get_midias">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path
-                        d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V448c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H176c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z" />
-                </svg>
+                <i class="uil uil-redo"></i>
             </button>
 
-            <button id="btn_play">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path
-                        d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
-                </svg>
-            </button>
+            <!-- <button id="btn_play">               
+                <i class="uil uil-play-circle"></i>
+            </button> -->
 
-            <button id="btn_pause">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                    <path
-                        d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z" />
-                </svg>
-            </button>
+            <!-- <button id="btn_pause">
+                <i class="uil uil-pause-circle"></i>
+            </button> -->
 
-            <button id="btn_stop">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path
-                        d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
-                </svg>
-            </button>
+            <!-- <button id="btn_stop">
+                <i class="uil uil-stop-circle"></i>
+            </button> -->
 
             <button id="add_midia">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                    <path
-                        d="M88.7 223.8L0 375.8V96C0 60.7 28.7 32 64 32H181.5c17 0 33.3 6.7 45.3 18.7l26.5 26.5c12 12 28.3 18.7 45.3 18.7H416c35.3 0 64 28.7 64 64v32H144c-22.8 0-43.8 12.1-55.3 31.8zm27.6 16.1C122.1 230 132.6 224 144 224H544c11.5 0 22 6.1 27.7 16.1s5.7 22.2-.1 32.1l-112 192C453.9 474 443.4 480 432 480H32c-11.5 0-22-6.1-27.7-16.1s-5.7-22.2 .1-32.1l112-192z" />
-                </svg>
+                <i class="uil uil-plus-circle"></i>
             </button>
 
         </div>
 
-        <div id="progress_wrap">
-            <div id="progress_bar">
-                <div id="timers">
-                    <div class="timer" id="time_corrente">02:05</div>
-                    <input id="progress_input" type="range" value="0" min="0" max="1000" step="1">
-                    <div class="timer" id="time_final">03:10</div>
-                </div>
-            </div>
+        <!-- video -->
+        <div id="video_control">
+            <!-- <video id="video_main" src="C:\Users\saulo\Videos\2023-04-20 09-06-26.mp4" controls="true"></video> -->
+            <video id="video_main" src="" controls="true"></video>
         </div>
+        <!-- video -->
 
-        <div id="midias_list"></div>
+        <div id="midias_list">
+            <!-- via js -->
+        </div>
 
     </section>
 
