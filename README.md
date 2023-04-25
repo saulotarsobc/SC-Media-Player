@@ -2,7 +2,7 @@
 
 ## App em electron para reproduzir midias numa sengunda tela
 
-![1677784227908](image/README/1677784227908.png)
+![1682435607845](image/README/1682435607845.png)
 
 ## ROADMAP
 
