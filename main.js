@@ -55,8 +55,12 @@ app.on("window-all-closed", function () {
 });
 
 /* code */
-ipcMain.on("addMidiaInDb", async (event, args) => {
-    console.log(args);
+ipcMain.on('setMidia', (e, args) => sec.webContents.send('setMidia', args));
+ipcMain.on('video/control', (e, args) => sec.webContents.send('video/control', args));
+ipcMain.on('video/setProgress', (e, args) => sec.webContents.send('video/setProgress', args));
+ipcMain.on('timeupdate', (e, args) => win.webContents.send('timeupdate', args));
+
+ipcMain.on("addMidiaInDb", async () => {
     dialog
         .showOpenDialog({ properties: ["openFile"] })
         .then((result) => {
@@ -67,23 +71,4 @@ ipcMain.on("addMidiaInDb", async (event, args) => {
             }
         })
         .catch((err) => console.log(err));
-});
-
-ipcMain.on('setMidia', (event, args) => {
-    console.log(args);
-    sec.webContents.send('setMidia', args)
-});
-
-ipcMain.on('video/control', (event, args) => {
-    console.log(args);
-    sec.webContents.send('video/control', args);
-});
-
-ipcMain.on('video/setProgress', (event, args) => {
-    console.log(args);
-    sec.webContents.send('video/setProgress', args);
-});
-
-ipcMain.on('timeupdate', (event, args) => {
-    win.webContents.send('timeupdate', args);
 });
