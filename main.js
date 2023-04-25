@@ -8,7 +8,7 @@ remoteMain.initialize();
 function createWindows() {
     /* main window */
     win = new BrowserWindow({
-        height: 500,
+        maxHeight: 600,
         width: 450,
         webPreferences: {
             nodeIntegration: true,
