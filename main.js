@@ -41,17 +41,16 @@ function createWindows() {
     // sec.webContents.openDevTools();
 }
 
-app.whenReady().then(() => app.on("activate", () => BrowserWindow.getAllWindows().length === 0) ? createWindows() : "");
-
+app.whenReady()
+    .then(() => app.on("activate", () => BrowserWindow.getAllWindows().length === 0) ? createWindows() : "");
 app.on("window-all-closed", () => process.platform !== "darwin" ? app.quit() : "");
 
 /* code */
-ipcMain.on('setMidia', (e, args) => sec.webContents.send('setMidia', args));
-ipcMain.on('video/control', (e, args) => sec.webContents.send('video/control', args));
-ipcMain.on('video/setProgress', (e, args) => sec.webContents.send('video/setProgress', args));
-ipcMain.on('timeupdate', (e, args) => win.webContents.send('timeupdate', args));
-
-ipcMain.on("addMidiaInDb", () => {
+ipcMain.on('setMidia', (e, a) => sec.webContents.send('setMidia', a));
+ipcMain.on('video/control', (e, a) => sec.webContents.send('video/control', a));
+ipcMain.on('video/setProgress', (e, a) => sec.webContents.send('video/setProgress', a));
+ipcMain.on('timeupdate', (e, a) => win.webContents.send('timeupdate', a));
+ipcMain.on("addMidiaInDb", (e, a) => {
     dialog
         .showOpenDialog({ properties: ["openFile"] })
         .then((result) => {
