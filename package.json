@@ -6,7 +6,37 @@
     "main": "main.js",
     "build": {
         "productName": "SC Media Player",
-        "appId": "saulotarsobc.sc.media.player"
+        "appId": "saulotarsobc.sc.media.player",
+        "win": {
+            "publish": [
+                "github"
+            ],
+            "publisherName": "Saulo INC",
+            "target": "NSIS"
+        },
+        "nsis": {
+            "oneClick": false,
+            "license": "./LICENSE.md",
+            "allowToChangeInstallationDirectory": true
+        },
+        "linux": {
+            "category": "Utilities",
+            "target": "AppImage",
+            "publish": [
+                "github"
+            ]
+        },
+        "mac": {
+            "target": {
+                "target": "dmg",
+                "arch": [
+                    "universal"
+                ]
+            },
+            "publish": [
+                "github"
+            ]
+        }
     },
     "scripts": {
         "start-debug": "electron .  --trace-warnings > ./app-run.log  2>&1",

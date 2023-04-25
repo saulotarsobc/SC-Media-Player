@@ -18,7 +18,7 @@ function createWindows() {
     });
     win.loadFile("./src/views/index.html");
     win.setTitle("SC Media Player");
-    win.setPosition(50, 50);
+    // win.setPosition(50, 50);
     remoteMain.enable(win.webContents);
     // win.webContents.openDevTools();
 
