@@ -36,23 +36,14 @@ function createWindows() {
     });
     sec.loadFile("./src/views/sec.html");
     sec.setTitle("SC-Media-Player-Second");
-    sec.setPosition(500, 50);
+    // sec.setPosition(500, 50);
     sec.setAspectRatio(16 / 9);
     // sec.webContents.openDevTools();
 }
 
-app.whenReady().then(() => {
-    createWindows();
-    console.log("app inicializado...");
-    app.on("activate", function () {
-        if (BrowserWindow.getAllWindows().length === 0) createWindows();
-    });
-});
+app.whenReady().then(() => app.on("activate", () => BrowserWindow.getAllWindows().length === 0) ? createWindows() : "");
 
-app.on("window-all-closed", function () {
-    console.log("...app finalizado");
-    if (process.platform !== "darwin") app.quit();
-});
+app.on("window-all-closed", () => process.platform !== "darwin" ? app.quit() : "");
 
 /* code */
 ipcMain.on('setMidia', (e, args) => sec.webContents.send('setMidia', args));
@@ -60,7 +51,7 @@ ipcMain.on('video/control', (e, args) => sec.webContents.send('video/control', a
 ipcMain.on('video/setProgress', (e, args) => sec.webContents.send('video/setProgress', args));
 ipcMain.on('timeupdate', (e, args) => win.webContents.send('timeupdate', args));
 
-ipcMain.on("addMidiaInDb", async () => {
+ipcMain.on("addMidiaInDb", () => {
     dialog
         .showOpenDialog({ properties: ["openFile"] })
         .then((result) => {
